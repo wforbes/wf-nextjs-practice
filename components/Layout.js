@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
 	return (
 		<>
 			<Head>
-				<title>wf-nextjs-practice | {getPathName()}</title>
+				<title>{`wf-nextjs-practice | ${getPathName()}`}</title>
 			</Head>
 			<div className="content">
 				<Navbar />
