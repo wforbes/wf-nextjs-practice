@@ -3,6 +3,6 @@ const Projects = () => {
 		<div>
 			<h1>All Projects</h1>
 		</div>
-	);
-};
-export default Projects;
+	)
+}
+export default Projects

@@ -13,7 +13,7 @@ const Navbar = () => {
 			<Link href="/about">About</Link>
 			<Link href="/projects">Projects</Link>
 		</nav>
-	);
+	)
 }
  
-export default Navbar;
+export default Navbar

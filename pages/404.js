@@ -23,7 +23,7 @@ const NotFound = () => {
 			<p>Redirecting you to the Home Page in {seconds} seconds...</p>
 			<p>Or you can click here: <Link href="/">Home Page</Link>.</p>
 		</div>
-	);
+	)
 }
  
-export default NotFound;
+export default NotFound
