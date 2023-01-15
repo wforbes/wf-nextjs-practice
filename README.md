@@ -15,6 +15,11 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Tutorials
+
+To initialize and play with the basics: [The Net Ninja - Next.js Tutorial for Beginners](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g9gP2onazU5-2M-AzA8eBw)
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
