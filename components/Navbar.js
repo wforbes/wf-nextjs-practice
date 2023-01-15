@@ -1,17 +1,17 @@
-import Link from 'next/Link'
-import Image from 'next/Image'
+import Link from 'next/link'
+import Image from 'next/image'
 
 const Navbar = () => {
 	return (
 		<nav>
 			<div className="logo">
 				<Link href="/">
-					<Image src="/logo.png" width={48} height={48} />
+					<Image src="/logo.png" width={48} height={48} alt="WF logo" />
 				</Link>
 			</div>
 			<Link href="/">Home</Link>
 			<Link href="/about">About</Link>
-			<Link href="/projects">Projects</Link>
+			<Link href="/pictures">Pictures</Link>
 		</nav>
 	)
 }
