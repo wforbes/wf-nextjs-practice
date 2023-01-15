@@ -11,10 +11,14 @@
 	justify-content: center;
 	margin: 0 auto 3em;
 	text-align:center;
+	min-height: 12em;
 }
 
 .thumb {
-	margin: 5px;
+	margin: 0.4em;
+}
+.photo {
+	border-radius: 0.35em;
 }
 
 .btn {
@@ -22,10 +26,23 @@
 	width: 150px;
 	padding: 8px 0;
 	background: #4979ff;
+	border: none;
 	border-radius: 4px;
 	color: white;
 	text-align: center;
 	cursor: pointer;
+	font-family: "Nunito";
+	font-size: 1em;
+}
+
+.imgPlaceholder {
+	width: 100px;
+	height: 100px;
+	border: 1px solid darkslategray;
+}
+.imgPlaceholderCaption {
+	min-height: 1.9em;
+	height: 1.9em;
 }
 
 .leftItem {
