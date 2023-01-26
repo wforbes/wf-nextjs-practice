@@ -1,7 +1,15 @@
-.container {
+.pageControlContainer {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.controlContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	border: 
 }
 
 .thumbContainer {
@@ -16,6 +24,7 @@
 
 .thumb {
 	margin: 0.4em;
+	cursor: pointer;
 }
 .photo {
 	border-radius: 0.35em;
