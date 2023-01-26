@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
 	
 	const router = useRouter()
 
-	const getPathName = () => {
+	const getPathName = () : string => {
 		let displayPath = router.pathname.substring(1, router.pathname.length)
 		if (displayPath.length === 0) return "Home"
 		return displayPath[0].toLocaleUpperCase() + displayPath.substring(1, displayPath.length)
