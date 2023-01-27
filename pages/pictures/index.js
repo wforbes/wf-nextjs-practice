@@ -1,10 +1,11 @@
-import Image from 'next/image'
+import ImageWithFallback from 'src/graphics/ImageWithFallback'
 import Link from 'next/link'
 import { useState } from 'react'
 import styles from '../../styles/Pictures.module.css'
 import PhotoPlaceholders from './PhotoPlaceholders'
 
 const initialMaxPerPage = 16
+const fallbackImgSrc = '/errorImg.png'
 
 export const getStaticProps = async () => {
 	const photoRes = await fetch(`https://jsonplaceholder.typicode.com/photos?_start=0&_limit=${initialMaxPerPage}`)
@@ -15,7 +16,6 @@ export const getStaticProps = async () => {
 	if(typeof totalCount !== 'undefined' && totalCount.length > 0) {
 		totalCount = Number.parseInt(totalCount)
 	}
-
 
 	return {
 		props: {
@@ -77,6 +77,25 @@ const Projects = ({ photos, total }) => {
 	return (
 		<div>
 			<h1>Pictures</h1>
+			<p>
+				This page loads images from
+				<a href="https://jsonplaceholder.typicode.com/" target="_blank">Json Placeholder</a>
+				and paginates them.
+			</p>
+			<ul>
+				<li>
+					While the request to json placeholder is loading, the thumbnails show a loading
+					placeholder image.
+				</li>
+				<li>
+					There is a dead-face emoji image used for a fall back when the request fails.
+					Since json placeholder is a heavily used service, the requests fail often.
+				</li>
+				<li>
+					Each thumbnail here is linked to an individual SSG page with the photo's object
+					data from the placeholder api.
+				</li>
+			</ul>
 			<div className={styles.thumbContainer}>
 				{state.loading ?
 					<PhotoPlaceholders maxPageTotal={state.maxPerPage} />
@@ -84,14 +103,17 @@ const Projects = ({ photos, total }) => {
 					state.displayPhotos ? state.displayPhotos.map(photo => (
 						<div className={styles.thumb} key={`photo-${photo.id}`}>
 							<Link href={`/pictures/${photo.id}`} key={photo.id}>
-								<Image
-									src={photo.url + '.png'}
-									width={100}
-									height={100}
-									alt={photo.title}
-									priority={photo.id===1}
-									className={styles.photo}
-								/>
+								<a>
+									<ImageWithFallback
+										src={photo.thumbnailUrl + '.png'}
+										width={100}
+										height={100}
+										alt={photo.title}
+										priority={photo.id===1}
+										className={styles.photo}
+										fallbackSrc={fallbackImgSrc}
+									/>
+								</a>
 							</Link>
 							<div>Pic #{photo.id}</div>
 						</div>
