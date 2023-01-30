@@ -78,9 +78,14 @@ const Projects = ({ photos, total }) => {
 		<div>
 			<h1>Pictures</h1>
 			<p>
-				This page loads images from
-				<a href="https://jsonplaceholder.typicode.com/" target="_blank">Json Placeholder</a>
-				and paginates them.
+				This page loads images from&nbsp;
+				<a
+					href="https://jsonplaceholder.typicode.com/"
+					target="_blank"
+					className={styles.link}
+				>
+					Json Placeholder
+				</a> and paginates them.
 			</p>
 			<ul>
 				<li>
