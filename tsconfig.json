@@ -17,17 +17,17 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "outDir": "build",
     "jsx": "preserve",
-    "target": "es6",
-	"noImplicitAny": false
+    "target": "es5"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-	"**/*.js",
-	"**/*.jsx"
-, "pages/_document.jsx"  ],
+    "**/*.tsx"
+  ],
   "exclude": [
     "node_modules"
   ]
