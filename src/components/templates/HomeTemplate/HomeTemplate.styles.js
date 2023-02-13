@@ -1,8 +1,11 @@
-import { container } from 'styles/nextjs-material-kit'
+import { container, pageContentContainer, boldText, boldLink } from 'styles/nextjs-material-kit'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
 	container,
+	pageContentContainer,
+	boldText,
+	boldLink,
 	paper: {
 		padding: theme.spacing(2),
 		textAlign: 'center',
@@ -17,12 +20,18 @@ const useStyles = makeStyles((theme) => ({
 		alignContent: 'center',
 		flexDirection: 'column'
 	},
+	introHighlights: {
+		padding: theme.spacing(3)
+	},
 	listContainer: {
 		padding: theme.spacing(3)
 	},
 	introAvatar: {
 		overflow: 'visible !important',
 		marginTop: "2.2rem"
+	},
+	highlightAvatar: {
+		overflow: 'visible !important'
 	},
 	main: {
 		background: "#FFFFFF",

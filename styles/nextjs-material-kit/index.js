@@ -147,6 +147,9 @@ const boldLink = {
 	fontWeight: 'bold',
 	textDecoration: 'underline'
 }
+const boldText = {
+	fontWeight: 'bold'
+}
 
 export {
 	hexColorToRGB,
@@ -168,5 +171,6 @@ export {
 	warningBoxShadow,
 	dangerBoxShadow,
 	roseBoxShadow,
-	boldLink
+	boldLink,
+	boldText
 }
