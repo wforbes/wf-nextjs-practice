@@ -40,7 +40,7 @@ const handleCloseAway = (event) => {
 	setAnchorEl(null);
 };
 const classes = useStyles();
-console.log(props.buttonIcon)
+
 const {
 	buttonText,
 	buttonIcon,

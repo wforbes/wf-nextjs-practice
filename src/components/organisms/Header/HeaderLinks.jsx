@@ -1,21 +1,17 @@
-/*eslint-disable*/
 import React from "react";
 import Link from "next/link";
 
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
 
-// @material-ui/icons
 import {
 	MdCloudDownload as CloudDownload
 } from "react-icons/md";
 import { Apps as AppsIcon } from '@material-ui/icons'
 
-// core components
 import CustomDropdown from "src/components/molecules/CustomDropdown/CustomDropdown";
 import Button from "src/components/molecules/CustomButtons/Button";
 
