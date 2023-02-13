@@ -1,8 +1,10 @@
-import { container } from 'styles/nextjs-material-kit'
+import { container, pageContentContainer, boldLink } from 'styles/nextjs-material-kit'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
 	container,
+	pageContentContainer,
+	boldLink,
 	pageHeadingContainer: {
 		color: "#FFFFFF",
 		textAlign: "center"
