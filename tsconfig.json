@@ -24,6 +24,7 @@
     "target": "es5"
   },
   "include": [
+	".d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"

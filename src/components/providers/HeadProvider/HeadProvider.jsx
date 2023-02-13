@@ -17,7 +17,7 @@ const HeadProvider = ({ title, children }) => (
 			<link rel="icon" href="/favicon.ico" />
 			<meta
 				name="viewport"
-				content="minimum-scale=1, initial-scale=1, width=device-width"
+				content="width=device-width, initial-scale=1, shrink-to-fit=no"
 			/>
 		</Head>
 		{children}
