@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
 	listContainer: {
 		padding: theme.spacing(3)
 	},
+	introAvatar: {
+		overflow: 'visible !important',
+		marginTop: "2.2rem"
+	},
 	main: {
 		background: "#FFFFFF",
 		position: "relative",

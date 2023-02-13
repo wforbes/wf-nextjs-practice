@@ -1,9 +1,7 @@
 /*
 * passionIcon, ideaIcon, and targetIcon found on https://flaticon.com
 */
-import Parallax from "src/components/molecules/Parallax/Parallax";
-import Container from '@material-ui/core/Container'
-import Paper from '@material-ui/core/Paper'
+import Parallax from "src/components/molecules/Parallax/Parallax"
 import GridContainer from 'src/components/molecules/Grid/GridContainer'
 import GridItem from 'src/components/molecules/Grid/GridItem'
 import List from '@material-ui/core/List'
@@ -42,12 +40,12 @@ const HomeTemplate = () => {
 										/>
 									</div>
 									<Typography variant="h5" component="h1">
-										Hello! My name is <strong>Will Forbes</strong>.<br /> I'm a Fullstack Software Engineer based in southern California.
+										Hello! My name is <strong>Will Forbes</strong>.<br /> I'm a Fullstack Software Engineer<br /> based in Southern California.
 									</Typography>
 									<List className={classes.listContainer}>
 										<ListItem>
-											<ListItemAvatar>
-												<Avatar alt="passionIcon" src="/passion_color.png" />
+											<ListItemAvatar >
+												<Avatar alt="passionIcon" src="/passion_color.png" width={40} height={40} className={classes.introAvatar} />
 											</ListItemAvatar>
 											<ListItemText
 												primary="Passionate about building my skills in software development and learning new things."
@@ -55,7 +53,7 @@ const HomeTemplate = () => {
 										</ListItem>
 										<ListItem>
 											<ListItemAvatar>
-												<Avatar alt="ideaIcon" src="/idea_color.png" />
+												<Avatar alt="ideaIcon" src="/idea_color.png" width={40} height={40} className={classes.introAvatar} />
 											</ListItemAvatar>
 											<ListItemText
 												primary="Interested in solving difficult problems and bringing value to others."
@@ -63,7 +61,7 @@ const HomeTemplate = () => {
 										</ListItem>
 										<ListItem>
 											<ListItemAvatar>
-												<Avatar alt="targetIcon" src="/target_color.png" />
+												<Avatar alt="targetIcon" src="/target_color.png" width={40} height={40} className={classes.introAvatar} />
 											</ListItemAvatar>
 											<ListItemText
 												primary="Focused on being thoughtful and considerate in my day-to-day life."
