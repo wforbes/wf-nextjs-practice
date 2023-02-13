@@ -4,7 +4,8 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import { MdMenu as MenuIcon } from 'react-icons/md'
-import Typography from '@material-ui/core/Typography'
+import Link from 'next/link'
+import Image from 'next/image'
 import PropTypes from 'prop-types'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,9 +29,11 @@ const Header = () => {
 					<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6" className={classes.title}>
-						Next.js Practice
-					</Typography>
+					<Link href="/">
+						<a>
+							<Image src="/logo.png" width={48} height={48} alt="WF logo" />
+						</a>
+					</Link>
 				</Toolbar>
 			</AppBar>
 		</div>
