@@ -30,6 +30,10 @@ IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
  */
 
+import { createMuiTheme } from "@material-ui/core";
+
+const theme = createMuiTheme()
+
  const hexColorToRGB = function (hexColor) {
 	let detectShorthand = /^#?([a-f\d])([a-f\d])([a-f\d])$/i; // #000 vs #000000
 	hexColor = hexColor?.replace(detectShorthand, function (m, r, g, b) {
@@ -50,7 +54,7 @@ const hexToRGBAlpha = function (hexColor, alpha) {
 	return `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
 }
 
- const containerFluid = {
+const containerFluid = {
 	paddingRight: "15px",
 	paddingLeft: "15px",
 	marginRight: "auto",
@@ -143,12 +147,17 @@ const roseBoxShadow = {
 		0.14
 	)}, 0 7px 10px -5px ${hexToRGBAlpha(roseColor, 0.4)}`
 };
+
+/* custom reusable styles (@wforbes87) */
 const boldLink = {
 	fontWeight: 'bold',
 	textDecoration: 'underline'
 }
 const boldText = {
 	fontWeight: 'bold'
+}
+const smlPadding = {
+	paddingBottom: theme.spacing(6)
 }
 
 export {
@@ -172,5 +181,6 @@ export {
 	dangerBoxShadow,
 	roseBoxShadow,
 	boldLink,
-	boldText
+	boldText,
+	smlPadding
 }
