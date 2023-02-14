@@ -1,17 +1,19 @@
-/*
-* passionIcon, ideaIcon, and targetIcon found on https://flaticon.com
-*/
+import React from 'react'
 import Parallax from "src/components/molecules/Parallax/Parallax"
 import GridContainer from 'src/components/molecules/Grid/GridContainer'
 import GridItem from 'src/components/molecules/Grid/GridItem'
 import { 
-	List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, Paper
+	List, ListItem, ListItemText, ListItemAvatar, Avatar, ListItemSecondaryAction,
+	Typography, Paper, Divider
 } from '@material-ui/core'
 
-import useStyles from './HomeTemplate.styles'
-import React from 'react'
+import { ChevronRight } from '@material-ui/icons'
 
 import classNames from "classnames";
+import useStyles from './HomeTemplate.styles'
+
+
+
 
 const HomeTemplate = () => {
 	const classes = useStyles()
@@ -44,8 +46,6 @@ const HomeTemplate = () => {
 		) 
 	}
 
-	const wguLink = () => (<a href="https://wgu.edu" target="_blank">https://wgu.edu</a>)
-
 	return (
 		<>
 			<Parallax small filter image="/profile-bg.jpg" />
@@ -55,7 +55,7 @@ const HomeTemplate = () => {
 						<GridContainer justify='center'>
 							<GridItem xs={12} sm={12} md={6}>
 								<div className={classes.profile}>
-									<div>
+									<div className={classes.profileImgContainer}>
 										<img
 											src="/img/selfie.png"
 											alt="..."
@@ -93,47 +93,113 @@ const HomeTemplate = () => {
 									</List>
 								</div>
 							</GridItem>
-							<GridItem xs={12} sm={12} md={6} className={classes.pageContentContainer}>
+							<GridItem xs={12} sm={12} md={6} className={classNames(classes.highlightContainer)}>
 								<Paper className={classes.introHighlights}>
-									<ListItem>
-										<ListItemAvatar>
-											<Avatar alt="codingIcon" src="/coding_color.png" width={40} height={40} className={classes.highlightAvatar} />
-										</ListItemAvatar>
-										<ListItemText
-											secondary={<Typography variant="body2" color="textSecondary" display="block">
-												View my <a href="/job-history" target="_blank" className={classes.boldLink}>work history</a>
-											</Typography>}
-										>
-											<span className={classes.boldText}>{ getYearsExperience() }</span> years of professional software experience.
-										</ListItemText>
-									</ListItem>
-									<ListItem>
-										<ListItemAvatar>
-											<Avatar alt="knowledgeIcon" src="/knowledge_color.png" width={40} height={40} className={classes.highlightAvatar} />
-										</ListItemAvatar>
-										<ListItemText
-											secondary={<Typography variant="body2" color="textSecondary" display="block">
-												From <a href="https://wgu.edu" target="_blank" className={classes.boldLink}>Western Governor's University</a>
-											</Typography>}
-										>
-											Bachelor's of Science in Software Engineering
-										</ListItemText>
-									</ListItem>
-									<ListItem>
-										<ListItemAvatar>
-											<Avatar alt="certificateIcon" src="/certificate_color.png" width={40} height={40} className={classes.highlightAvatar} />
-										</ListItemAvatar>
-										<ListItemText
-											secondary={<Typography variant="body2" color="textSecondary" display="block">
-												View my <a href="/certificates" target="_blank" className={classes.boldLink}>certificates</a>
-											</Typography>}
-										>
-											Numerous Technology Certifications
-										</ListItemText>
-									</ListItem>
-									<ListItem>
-										
-									</ListItem>
+									<List>
+										<ListItem>
+											<ListItemText>
+												<Typography variant="h5" align="center">
+													Highlights
+												</Typography>
+											</ListItemText>
+										</ListItem>
+										<Divider />
+										<ListItem>
+											<ListItemAvatar>
+												<Avatar alt="codingIcon" src="/coding_color.png" width={40} height={40} className={classes.highlightAvatar} />
+											</ListItemAvatar>
+											<ListItemText
+												secondary={<Typography variant="body2" color="textSecondary" display="block">
+													View my <a href="/job-history" className={classes.boldLink}>work history</a>
+												</Typography>}
+											>
+												<span className={classes.boldText}>{ getYearsExperience() }</span> years of professional software experience.
+											</ListItemText>
+											<ListItemSecondaryAction>
+												<ChevronRight />
+											</ListItemSecondaryAction>
+										</ListItem>
+										<Divider />
+										<ListItem>
+											<ListItemAvatar>
+												<Avatar alt="knowledgeIcon" src="/knowledge_color.png" width={40} height={40} className={classes.highlightAvatar} />
+											</ListItemAvatar>
+											<ListItemText
+												secondary={<Typography variant="body2" color="textSecondary" display="block">
+													From <a href="https://wgu.edu" target="_blank" className={classes.boldLink}>Western Governor's University</a>
+												</Typography>}
+											>
+												Bachelor's of Science in Software Engineering
+											</ListItemText>
+											<ListItemSecondaryAction>
+												<ChevronRight />
+											</ListItemSecondaryAction>
+										</ListItem>
+										<Divider />
+										<ListItem>
+											<ListItemAvatar>
+												<Avatar alt="certificateIcon" src="/certificate_color.png" width={40} height={40} className={classes.highlightAvatar} />
+											</ListItemAvatar>
+											<ListItemText
+												secondary={<Typography variant="body2" color="textSecondary" display="block">
+													View my <a href="/certificates" className={classes.boldLink}>certificates</a>
+												</Typography>}
+											>
+												Numerous Technology Certifications
+											</ListItemText>
+											<ListItemSecondaryAction>
+												<ChevronRight />
+											</ListItemSecondaryAction>
+										</ListItem>
+										<Divider />
+										<ListItem>
+											<ListItemAvatar>
+												<Avatar alt="trophyIcon" src="/trophy_color.png" width={40} height={40} className={classes.highlightAvatar} />
+											</ListItemAvatar>
+											<ListItemText
+												secondary={<Typography variant="body2" color="textSecondary" display="block">
+													View my <a href="/work-awards" className={classes.boldLink}>workplace awards</a>
+												</Typography>}
+											>
+												Multiple Company / Workplace Awards
+											</ListItemText>
+											<ListItemSecondaryAction>
+												<ChevronRight />
+											</ListItemSecondaryAction>
+										</ListItem>
+										<Divider />
+										<ListItem>
+											<ListItemAvatar>
+												<Avatar alt="codeIcon" src="/code_color.png" width={40} height={40} className={classes.highlightAvatar} />
+											</ListItemAvatar>
+											<ListItemText
+												secondary={<Typography variant="body2" color="textSecondary" display="block">
+													View my <a href="https://github.com/wforbes" target="_blank" className={classes.boldLink}>Github profile</a>
+												</Typography>}
+											>
+												Active Coder With 1000+ Commits Annually
+											</ListItemText>
+											<ListItemSecondaryAction>
+												<ChevronRight />
+											</ListItemSecondaryAction>
+										</ListItem>
+										<Divider />
+										<ListItem>
+											<ListItemAvatar>
+												<Avatar alt="skateboardIcon" src="/skateboard_color.png" width={40} height={40} className={classes.highlightAvatar} />
+											</ListItemAvatar>
+											<ListItemText
+												secondary={<Typography variant="body2" color="textSecondary" display="block">
+													View my skateboard <a href="/certificates" target="_blank" className={classes.boldLink}>videos and photos</a>
+												</Typography>}
+											>
+												Avid Skateboarder of 25+ Years
+											</ListItemText>
+											<ListItemSecondaryAction>
+												<ChevronRight />
+											</ListItemSecondaryAction>
+										</ListItem>
+									</List>
 								</Paper>
 							</GridItem>
 						</GridContainer>

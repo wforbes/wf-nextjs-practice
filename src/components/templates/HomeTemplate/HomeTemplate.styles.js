@@ -23,6 +23,14 @@ const useStyles = makeStyles((theme) => ({
 	introHighlights: {
 		padding: theme.spacing(3)
 	},
+	highlightContainer: {
+		"@media (min-width: 959px)": {
+			paddingTop: '3em'
+		},
+		"@media (max-width: 960px)": {
+			paddingTop: '0.5em !important'
+		}
+	},
 	listContainer: {
 		padding: theme.spacing(3)
 	},
@@ -58,11 +66,15 @@ const useStyles = makeStyles((theme) => ({
 	profile: {
 		textAlign: "center",
 		"& img": {
-			maxWidth: "160px",
+			maxWidth: "240px",
 			width: "100%",
 			margin: "0 auto",
 			transform: "translate3d(0, -50%, 0)"
 		}
+	},
+	profileImgContainer: {
+		height: '15vh' // reduces space between img and profile text
+					   //	needs to match highlight box height
 	},
 	beLoooong: {
 		height: '300em'
