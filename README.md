@@ -17,7 +17,9 @@ and working through the migration for practice.
 ## Contact
 
 [wforbes87 on Linkedin](https://linkedin.com/in/wforbes87)
+
 [wforbes on Github](https://github.com/wforbes)
+
 [wforbes.net](https://wforbes.net)
 
 ## Getting Started
