@@ -1,6 +1,25 @@
 # wf-nextjs-practice
 Practice next.js v10 project to match my current work project.
 
+Set up as the start of a portfolio website for myself with an expected completion date approx. May 2023 after my college graduation.
+
+Some portfolio examples will be within this project, while others will be standalone projects available in other repos. These will be
+listed here as they are completed.
+
+## Considerations
+This project is being configured to mimic my current work project. That way I can practice with Next.js and React in my freetime
+without risking any problems with my dayjob commits.
+
+For this reason, numerous dependencies are out of date (2021-ish) and in conflict with one another (react 17 with mui 4). It's my
+goal to eventually work through implementing the app with these dependencies, then going through an update to Next.js 13+ and Mui 5
+and working through the migration for practice.
+
+## Contact
+
+[wforbes87 on Linkedin](https://linkedin.com/in/wforbes87)
+[wforbes on Github](https://github.com/wforbes)
+[wforbes.net](https://wforbes.net)
+
 ## Getting Started
 
 Install project dependencies:
@@ -13,18 +32,13 @@ Run the local development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build the docker image:
+```bash
+docker build -t wf-nextjs-practice .
+```
 
-## Tutorials
+Run the docker container:
+```bash
+docker run -p 3000:3000 -d --name wf-nextjs-practice wf-nextjs-practice
+```
 
-To initialize and play with the basics: [The Net Ninja - Next.js Tutorial for Beginners](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g9gP2onazU5-2M-AzA8eBw)
-
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
