@@ -5,6 +5,9 @@ export const colors = {
 	secondary: {
 		main: '#4f9ee3'
 	},
+	success: {
+		main: '#006600'
+	},
 	background: {
 		light: '#fafafa',
 		default: 'rgba(233,233,233, 0.7)'
