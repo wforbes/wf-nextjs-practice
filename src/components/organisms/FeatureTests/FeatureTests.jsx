@@ -9,7 +9,8 @@ import {
 	Box,
 	Typography,
 	Container,
-	MenuItem
+	MenuItem,
+	Paper
 	
 } from '@material-ui/core'
 import { CodeOutlined } from '@material-ui/icons'
@@ -31,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.secondary.main,
 	},
+	featurePaper: {
+		marginTop: '1em',
+		marginBottom: '1em'
+	},
 	featureBtnContainer: {
 		margin: theme.spacing(2),
 		width: '100%',
@@ -42,8 +47,6 @@ const useStyles = makeStyles((theme) => ({
 	featureBoxRow: {
 		display: 'flex',
 		flexDirection: 'row',
-		marginTop: '1em',
-		marginBottom: '1em',
 		alignItems: 'center'
 	},
 	featureBoxRowItem: {
@@ -61,7 +64,41 @@ const FeatureTests = () => {
 	const dispatch = useDispatch()
 
 	const isLoading = useSelector(getIsLoading)
-	const loadingTestDuration = 5
+	const [loadingTestDuration, setLoadingDuration] = useState(5)
+	const [loadingDurationInvalid, setLoadingDurationInvalid] = useState(false)
+	const [loadingDurationHelperTxt, setLoadingDurationHelperTxt] = useState('')
+	const loadingDurationInvalidTxt = "Integer required"
+	const loadingDurationTooHigh = "Integer less than 20 required"
+	const loadingDurationTooLow = "Integer greater than 0 required"
+	const handleLoadingDurationChange = (e) => {
+		let value = e.target.value
+		console.log(isFinite(value))
+		if (!isFinite(value) || !isFinite(parseInt(value))) {
+			setLoadingDurationHelperTxt(loadingDurationInvalidTxt)
+			setLoadingDurationInvalid(true)
+			setLoadingDuration(value)
+			return
+		}
+
+		if (parseInt(value) > 20) {
+			setLoadingDurationHelperTxt(loadingDurationTooHigh)
+			setLoadingDurationInvalid(true)
+			setLoadingDuration(value)
+			return
+		}
+
+		if (parseInt(value) < 1) {
+			setLoadingDurationHelperTxt(loadingDurationTooLow)
+			setLoadingDurationInvalid(true)
+			setLoadingDuration(value)
+			return
+		}
+
+		setLoadingDurationHelperTxt('')
+		setLoadingDurationInvalid(false)
+		setLoadingDuration(value)
+	}
+
 	const [ loadingCountdown, setLoadingCountdown] = useState(loadingTestDuration)
 	const [countingDown, setCountingDown] = useState(false)
 	
@@ -83,6 +120,7 @@ const FeatureTests = () => {
 	}, [countingDown, loadingCountdown])
 
 	const showLoading = () => {
+		if (loadingDurationInvalid) return
 		dispatch(FeedbackActions.setIsLoading({
 			isLoading: true
 		}))
@@ -113,61 +151,77 @@ const FeatureTests = () => {
 				<Typography component="h1" variant="h5">
 					Feature Tests
 				</Typography>
-				<Box className={classes.featureBoxRow}>
-					<Button
-						variant="contained"
-						color="primary"
-						onClick={showLoading}
-					>
-						{isLoading ? 
-							`Loading State Active (${loadingCountdown})`
-							: 'Show Loading State'
-						}
-					</Button>		
-				</Box>
-				<Box className={classes.featureBoxRow}>	
-					<TextField
-						className={classes.featureBoxRowItem}
-						variant="outlined"
-						id="snackbarMsg"
-						label="Snackbar Message"
-						name="snackbarMsg"
-						onChange={(e) => setSnackbarMsg(e.target.value)}
-					/>
-					<FormControl className={classes.formControl}>
-						<InputLabel id="snackbarTypeLabel">
-							Snackbar Type
-						</InputLabel>
-						<Select
-							id="snackbarTypeSelect"
-							labelId="snackbarTypeLabel"
-							value={selectedSnackbarType}
-							onChange={(e) => setSelectedSnackbarType(e.target.value)}
+				<Paper elevation={3} className={classes.featurePaper}>
+					<Box className={classes.featureBoxRow}>
+						<TextField
+							className={classes.featureBoxRowItem}
+							variant="outlined"
+							id="loadingDurationTxt"
+							label="Loading Test Duration"
+							name="loadingDurationTxt"
+							value={loadingTestDuration}
+							onChange={handleLoadingDurationChange}
+							error={loadingDurationInvalid}
+							helperText={loadingDurationHelperTxt}
+						/>
+						<Button
+							className={classes.featureBoxRowItem}
+							variant="contained"
+							color="primary"
+							onClick={showLoading}
 						>
-							{snackbarTypes.length > 0 &&
-								snackbarTypes.map((type) => {
-									return (
-										<MenuItem
-											value={type}
-											key={`sbtype-${type}`}
-										>
-											{type}
-										</MenuItem>
-									)
-								})
+							{isLoading ? 
+								`Loading State Active (${loadingCountdown})`
+								: 'Show Loading State'
 							}
-							
-						</Select>
-					</FormControl>
-					<Button
-						className={classes.featureBoxRowItem}
-						variant="contained"
-						color="primary"
-						onClick={showSnackbar}
-					>
-						Show Snackbar
-					</Button>
-				</Box>
+						</Button>		
+					</Box>
+				</Paper>
+				<Paper elevation={3}>
+					<Box className={classes.featureBoxRow}>	
+						<TextField
+							className={classes.featureBoxRowItem}
+							variant="outlined"
+							id="snackbarMsgTxt"
+							label="Snackbar Message"
+							name="snackbarMsgTxt"
+							onChange={(e) => setSnackbarMsg(e.target.value)}
+						/>
+						<FormControl className={classes.formControl}>
+							<InputLabel id="snackbarTypeLabel">
+								Snackbar Type
+							</InputLabel>
+							<Select
+								id="snackbarTypeSelect"
+								labelId="snackbarTypeLabel"
+								value={selectedSnackbarType}
+								onChange={(e) => setSelectedSnackbarType(e.target.value)}
+							>
+								{snackbarTypes.length > 0 &&
+									snackbarTypes.map((type) => {
+										return (
+											<MenuItem
+												value={type}
+												key={`sbtype-${type}`}
+											>
+												{type}
+											</MenuItem>
+										)
+									})
+								}
+								
+							</Select>
+						</FormControl>
+						<Button
+							className={classes.featureBoxRowItem}
+							variant="contained"
+							color="primary"
+							onClick={showSnackbar}
+						>
+							Show Snackbar
+						</Button>
+					</Box>
+				</Paper>
 			</div>
 		</Container>
 	);
