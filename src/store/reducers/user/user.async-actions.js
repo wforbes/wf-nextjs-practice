@@ -9,21 +9,23 @@ export const asyncSignup = ({
 	firstName, lastName, email,
 	password, repeatPassword
 }) => async (dispatch) => {
+	console.log('user async actions')
+
 	try {
-		/*
 		console.log(
 			'signing up...', 
 			{ firstName, lastName, email, password, repeatPassword }
-		)*/
+		)
 
 		dispatch(FeedbackActions.setIsLoading({ isLoading: true }))
-		const { data: { body: user } } = await axios.post(`${apiPrefix}/signup`, {
+		let { data: user } = await axios.post(`${apiPrefix}/signup`, {
 			firstName, lastName,
 			email, password,
 			repeatPassword
 		})
 		
-		//console.log(user) //TODO: set currentUser with data from server
+		console.log('after front-post')
+		console.log(user) //TODO: set currentUser with data from server
 		user = { id: 1, firstName, lastName, email }
 
 		dispatch(Actions.setCurrentUser({
