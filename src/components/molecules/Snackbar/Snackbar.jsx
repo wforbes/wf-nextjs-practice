@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import IconButton from '@material-ui/core/IconButton'
 import MuiSnackbar from '@material-ui/core/Snackbar'
+import Fade from '@material-ui/core/Fade'
 import {
 	MdClose as CloseIcon,
 	MdCheckCircle as CheckCircleIcon,
@@ -22,41 +23,46 @@ const variantIcon = {
 }
 
 const Snackbar = ({
-	message, onClose, variant, open,
-	autoHideDuration, anchorOrigin, action
-}) => {
+		message, onClose, variant, open,
+		autoHideDuration, anchorOrigin, action
+	}) => {
+
 	const classes = useStyles()
 	const Icon = variantIcon[variant]
 
 	return (
-		<MuiSnackbar
-			anchorOrigin={anchorOrigin}
-			open={open}
-			autoHideDuration={autoHideDuration}
-			onClose={onClose}
-		>
-			<SnackbarContent
-				className={clsx(classes[variant], classes.root)}
-				aria-describedby="snackbar"
-				message={(
-					<span id="snackbar" className={classes.message}>
-						<Icon className={clsx(classes.icon, classes.iconVariant)} />
-						{message}
-					</span>
-				)}
-				action={[
-					...(action ? [action] : []),
-					<IconButton
-						key="close"
-						aria-label="close"
-						color="inherit"
-						onClick={onClose}
-					>
-						<CloseIcon className={classes.icon} />
-					</IconButton>
-				]}
-			/>
-		</MuiSnackbar>
+		<>
+			{!!variant && variant.length > 0 &&
+				<MuiSnackbar
+					anchorOrigin={anchorOrigin}
+					open={open}
+					autoHideDuration={autoHideDuration}
+					onClose={onClose}
+				>
+					<SnackbarContent
+						className={clsx(classes[variant], classes.root)}
+						aria-describedby="snackbar"
+						message={(
+							<span id="snackbar" className={classes.message}>
+								<Icon className={clsx(classes.icon, classes.iconVariant)} />
+								{message}
+							</span>
+						)}
+						action={[
+							...(action ? [action] : []),
+							<IconButton
+								key="close"
+								aria-label="close"
+								color="inherit"
+								onClick={onClose}
+							>
+								<CloseIcon className={classes.icon} />
+							</IconButton>
+						]}
+					/>
+				</MuiSnackbar>
+			}
+		</>
 	)
 }
 
@@ -66,7 +72,7 @@ Snackbar.propTypes = {
 	/** Function to be called on close event */
 	onClose: PropTypes.func.isRequired,
 	/** Variant of the snavbar */
-	variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
+	variant: PropTypes.oneOf(['success', 'warning', 'error', 'info', '']).isRequired,
 	/** It tells if the snackbar should be shown */
 	open: PropTypes.bool.isRequired,
 	/** Number of miliseconds before the snackbar close automatically */

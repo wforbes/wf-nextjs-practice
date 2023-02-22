@@ -5,9 +5,10 @@ let setLoadingTrueCount = 0
 
 const initialState = {
 	message: '',
-	type: 'error',
+	type: '',
 	isLoading: false,
-	hideOnClickAway: true
+	hideOnClickAway: true,
+	autoHideDuration: 6000
 }
 
 const setFeedback = handleAction(
