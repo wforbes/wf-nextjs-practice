@@ -46,19 +46,23 @@ const SignupForm = () => {
 		e.preventDefault()
 		
 		dispatch(asyncSignup({
+			username,
+			email,
 			firstName,
 			lastName,
-			email,
 			password,
-			repeatPassword
+			repeatPassword,
+			allowExtraEmails
 		}))
 	}
 
+	const [username, setUsername] = useState('')
+	const [email, setEmail] = useState('')
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
-	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [repeatPassword, setRepeatPassword] = useState('')
+	const [allowExtraEmails, setAllowExtraEmails] = useState(false)
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -72,73 +76,91 @@ const SignupForm = () => {
 				</Typography>
 				<form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
 					<Grid container spacing={2}>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							autoComplete="fname"
-							name="firstName"
-							variant="outlined"
-							required
-							fullWidth
-							id="firstName"
-							label="First Name"
-							autoFocus
-							onChange={(e) => setFirstName(e.target.value)}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							variant="outlined"
-							required
-							fullWidth
-							id="lastName"
-							label="Last Name"
-							name="lastName"
-							autoComplete="lname"
-							onChange={(e) => setLastName(e.target.value)}
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<TextField
-							variant="outlined"
-							required
-							fullWidth
-							id="email"
-							label="Email Address"
-							name="email"
-							autoComplete="email"
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<TextField
-							variant="outlined"
-							required
-							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							id="password"
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<TextField
-							variant="outlined"
-							required
-							fullWidth
-							name="repeat-password"
-							label="Repeat Password"
-							type="password"
-							id="repeat-password"
-							onChange={(e) => setRepeatPassword(e.target.value)}
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<FormControlLabel
-							control={<Checkbox value="allowExtraEmails" color="primary" />}
-							label="I want to receive news and updates via email."
-						/>
-					</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="username"
+								label="Username"
+								name="username"
+								autoComplete="username"
+								onChange={(e) => setUsername(e.target.value)}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="email"
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<TextField
+								autoComplete="fname"
+								name="firstName"
+								variant="outlined"
+								required
+								fullWidth
+								id="firstName"
+								label="First Name"
+								autoFocus
+								onChange={(e) => setFirstName(e.target.value)}
+							/>
+						</Grid>
+						<Grid item xs={12} sm={6}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="lastName"
+								label="Last Name"
+								name="lastName"
+								autoComplete="lname"
+								onChange={(e) => setLastName(e.target.value)}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								id="password"
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								name="repeat-password"
+								label="Repeat Password"
+								type="password"
+								id="repeat-password"
+								onChange={(e) => setRepeatPassword(e.target.value)}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<FormControlLabel
+								control={
+									<Checkbox
+										value={allowExtraEmails}
+										color="primary"
+										onChange={(e) => setAllowExtraEmails}
+									/>
+								}
+								label="I want to receive news and updates via email."
+							/>
+						</Grid>
 					</Grid>
 					<Button
 						type="submit"
