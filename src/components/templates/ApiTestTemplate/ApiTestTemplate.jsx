@@ -7,6 +7,7 @@ import GridItem from 'src/components/molecules/Grid/GridItem'
 import { useSelector } from 'react-redux'
 import { getCurrentUser } from 'src/store/reducers/user/user.selector'
 
+import FeatureTests from 'src/components/organisms/FeatureTests/FeatureTests'
 import SignupForm from 'src/components/organisms/SignupForm/SignupForm'
 import LoginForm from 'src/components/organisms/LoginForm/LoginForm'
 
@@ -50,6 +51,8 @@ TabPanel.propTypes = {
 	value: PropTypes.any.isRequired,
 };
 
+
+
 const ApiTestTemplate = () => {
 	const classes = useStyles()
 	const [value, setValue] = useState(0)
@@ -59,6 +62,8 @@ const ApiTestTemplate = () => {
 	}
 
 	const { user } = useSelector(getCurrentUser)
+
+	
 
 	return (
 		<>
@@ -77,14 +82,18 @@ const ApiTestTemplate = () => {
 				<div>User State: {user.email && user.email !== '' ? user.email : 'No User' }</div>
 				<AppBar position='static'>
 					<Tabs value={value} onChange={handleChange}>
+						<Tab label='Feature Tests' />
 						<Tab label='Signup Form' />
 						<Tab label='Login Form' />
 					</Tabs>
 				</AppBar>
 				<TabPanel value={value} index={0}>
-					<SignupForm />
+					<FeatureTests />
 				</TabPanel>
 				<TabPanel value={value} index={1}>
+					<SignupForm />
+				</TabPanel>
+				<TabPanel value={value} index={2}>
 					<LoginForm />
 				</TabPanel>
 			</RaisedPageCard>
