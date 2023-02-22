@@ -4,13 +4,13 @@ import {
 	Button,
 	CssBaseline,
 	TextField,
-	FormControlLabel,
-	Checkbox,
-	Link,
+	FormControl,
+	InputLabel,
 	Box,
-	Grid,
 	Typography,
-	Container
+	Container,
+	MenuItem
+	
 } from '@material-ui/core'
 import { CodeOutlined } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
@@ -18,6 +18,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { Actions as FeedbackActions } from 'src/store/reducers/feedback/actions'
 import { getIsLoading } from 'src/store/reducers/feedback/selectors'
+import Select from '@material-ui/core/Select'
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -32,31 +33,32 @@ const useStyles = makeStyles((theme) => ({
 	},
 	featureBtnContainer: {
 		margin: theme.spacing(2),
+		width: '100%',
 		display: 'flex',
 		flexDirection: 'column',
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
-	featureBtnRow: {
+	featureBoxRow: {
 		display: 'flex',
 		flexDirection: 'row',
-		alignItems: 'center',
-		width: '100%'
+		marginTop: '1em',
+		marginBottom: '1em',
+		alignItems: 'center'
 	},
-	wtf: {
+	featureBoxRowItem: {
+		margin: '1em',
 		display: 'flex'
+	},
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 180,
 	}
 }));
 
 const FeatureTests = () => {
 	const classes = useStyles()
-	
 	const dispatch = useDispatch()
-	const showSnackbar = () => {
-		dispatch(FeedbackActions.setFeedback({
-			message: 'Testing...',
-			type: 'error'
-		}))
-	}
 
 	const isLoading = useSelector(getIsLoading)
 	const loadingTestDuration = 5
@@ -64,16 +66,16 @@ const FeatureTests = () => {
 	const [countingDown, setCountingDown] = useState(false)
 	
 	useEffect(() => {
-		console.log(countingDown, loadingCountdown)
-		if (!countingDown || loadingCountdown > 0) {
+		if (!countingDown || loadingCountdown <= 0) {
 			return
 		}
 		setTimeout(() => {
-			if (loadingCountdown <= 0) {
+			if (loadingCountdown <= 1) {
 				dispatch(FeedbackActions.setIsLoading({
 					isLoading: false
 				}))
 				setCountingDown(false)
+				setLoadingCountdown(loadingTestDuration)
 				return
 			}
 			setLoadingCountdown(loadingCountdown - 1)
@@ -85,10 +87,24 @@ const FeatureTests = () => {
 			isLoading: true
 		}))
 		setCountingDown(true)
-		console.log(countingDown)
 	}
+
+	const [snackbarMsg, setSnackbarMsg ] = useState('')
+	const snackbarTypes = [
+		'success', 'warning', 'error', 'info'
+	]
+	const [selectedSnackbarType, setSelectedSnackbarType] = useState('')
+	const showSnackbar = () => {
+		let message = snackbarMsg !== '' ? snackbarMsg : 'Testing...'
+		if (!selectedSnackbarType || selectedSnackbarType.length === 0) return;
+		dispatch(FeedbackActions.setFeedback({
+			message,
+			type: selectedSnackbarType
+		}))
+	}
+
 	return (
-		<Container component="main" maxWidth="xs">
+		<Container component="main" maxWidth="md">
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}>
@@ -97,32 +113,61 @@ const FeatureTests = () => {
 				<Typography component="h1" variant="h5">
 					Feature Tests
 				</Typography>
-				<Grid container spacing={2} className={classes.featureBtnContainer}>
-					<Grid item xs={12} sm={12} className={classes.featureBtnRow}>
-						<Button
-							fullWidth
-							variant="contained"
-							color="primary"
-							onClick={showLoading}
+				<Box className={classes.featureBoxRow}>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={showLoading}
+					>
+						{isLoading ? 
+							`Loading State Active (${loadingCountdown})`
+							: 'Show Loading State'
+						}
+					</Button>		
+				</Box>
+				<Box className={classes.featureBoxRow}>	
+					<TextField
+						className={classes.featureBoxRowItem}
+						variant="outlined"
+						id="snackbarMsg"
+						label="Snackbar Message"
+						name="snackbarMsg"
+						onChange={(e) => setSnackbarMsg(e.target.value)}
+					/>
+					<FormControl className={classes.formControl}>
+						<InputLabel id="snackbarTypeLabel">
+							Snackbar Type
+						</InputLabel>
+						<Select
+							id="snackbarTypeSelect"
+							labelId="snackbarTypeLabel"
+							value={selectedSnackbarType}
+							onChange={(e) => setSelectedSnackbarType(e.target.value)}
 						>
-							{isLoading ? 
-								`Loading State Active (${loadingCountdown})`
-								: 'Show Loading State'
+							{snackbarTypes.length > 0 &&
+								snackbarTypes.map((type) => {
+									return (
+										<MenuItem
+											value={type}
+											key={`sbtype-${type}`}
+										>
+											{type}
+										</MenuItem>
+									)
+								})
 							}
-						</Button>
-						
-					</Grid>
-					<Grid item xs={12} sm={12} className={classes.featureBtnRow}>
-						<Button
-							fullWidth
-							variant="contained"
-							color="primary"
-							onClick={showSnackbar}
-						>
-							Show Snackbar
-						</Button>
-					</Grid>
-				</Grid>
+							
+						</Select>
+					</FormControl>
+					<Button
+						className={classes.featureBoxRowItem}
+						variant="contained"
+						color="primary"
+						onClick={showSnackbar}
+					>
+						Show Snackbar
+					</Button>
+				</Box>
 			</div>
 		</Container>
 	);

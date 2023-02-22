@@ -41,8 +41,6 @@ export const sendErrorResponse = (_req, res, error) => {
 		details = error.details
 	}
 
-	console.log(statusMessage, details)
-
 	res.status(statusCode).send({
 		status: statusCode,
 		message: statusMessage,

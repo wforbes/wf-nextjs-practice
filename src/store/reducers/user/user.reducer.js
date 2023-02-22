@@ -7,10 +7,7 @@ const initialState = {
 
 const setCurrentUser = handleAction(
 	Actions.setCurrentUser,
-	(state, { payload }) => {
-		console.log('user reducer', payload)
-		return { ...state, ...payload}
-	},
+	(state, { payload }) => ({ ...state, ...payload}),
 	initialState
 )
 
