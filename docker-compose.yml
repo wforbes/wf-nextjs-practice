@@ -14,8 +14,9 @@ services:
     image: mongo
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=wforbes
-      - MONGO_INITDB_ROOT_PASSWORD=thepassword
+      MONGO_INITDB_DATABASE: admin
+      MONGO_INITDB_ROOT_USERNAME: wforbes
+      MONGO_INITDB_ROOT_PASSWORD: thepassword
     volumes:
       - mongo-db:/data/db
     ports:
