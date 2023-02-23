@@ -9,16 +9,7 @@ import { pageHeadingContainer,
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
-	container,
-	pageContentContainer,
-	boldLink,
-	pageHeadingContainer,
-	pageHeading,
-	main,
-	mainRaised,	
-	beLoooong: {
-		height: '300em'
-	}
+	// no styles needed here... yet
 }))
 
 export default useStyles

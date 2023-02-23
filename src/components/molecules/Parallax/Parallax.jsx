@@ -3,7 +3,7 @@
 */
 
 import { useState, useEffect } from 'react'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import PropTypes from 'prop-types'
 
 import useStyles from './Parallax.styles'
@@ -27,25 +27,25 @@ export default function Parallax(props) {
 		setTransform('translate3d(0,' + windowScrollTop + 'px,0)');
 	};
 
-	const { filter, className, children, style, image, small, responsive } = props;
+	const { filter, className, children, style, image, size, responsive } = props;
 
-	const classes = useStyles();
-
-	const parallaxClasses = classNames({
+	const classes = useStyles()
+	const parallaxClasses = clsx({
 		[classes.parallax]: true,
 		[classes.filter]: filter,
-		[classes.small]: small,
 		[classes.parallaxResponsive]: responsive,
-		[className]: className !== undefined
+		[className]: className !== undefined,
+		...(!!size && {[classes[size]]: true}) //if size prop is included,
+												//	set it as a key on styles
 	});
 
 	return (
 		<div
 			className={parallaxClasses}
 			style={{
-			...style,
-			backgroundImage: 'url(' + image + ')',
-			transform: transform
+				...style,
+				backgroundImage: 'url(' + image + ')',
+				transform: transform
 			}}
 		>
 			{children}
@@ -59,7 +59,7 @@ Parallax.propTypes = {
 	children: PropTypes.node,
 	style: PropTypes.string,
 	image: PropTypes.string,
-	small: PropTypes.bool,
+	size: PropTypes.oneOf(['large', 'medium', 'small', 'xsmall', '']),
 	// this will add a min-height of 660px on small screens
 	responsive: PropTypes.bool
 };

@@ -6,7 +6,7 @@ import FeedbackProvider from 'src/components/providers/FeedbackProvider/Feedback
 const ApiTest = () => (
 	<HeadProvider>
 		<FeedbackProvider>
-			<MainTemplate>
+			<MainTemplate pageHeading="API Tests">
 				<ApiTestTemplate />
 			</MainTemplate>
 		</FeedbackProvider>

@@ -12,39 +12,33 @@ import {
 	Container
 } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import { makeStyles } from '@material-ui/core/styles'
+import useStyles from './SignupForm.styles'
 
 import { useDispatch } from 'react-redux'
 import { asyncSignup } from 'src/store/reducers/user/user.async-actions'
 
-const useStyles = makeStyles((theme) => ({
-		paper: {
-		marginTop: theme.spacing(8),
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-	},
-		avatar: {
-		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
-	},
-	form: {
-		width: '100%', // Fix IE 11 issue.
-		marginTop: theme.spacing(3),
-	},
-	submit: {
-		margin: theme.spacing(3, 0, 2),
-	},
-}));
 
 const SignupForm = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
 	
+	const formIsValid = () => {
+		//TODO
+		//validateRequiredFields()
+		return true
+	}
+
+	const validateRequiredFields = () => {
+		return !_.isEmpty(userData.email)
+		|| !_.isEmpty(userData.password)
+		|| !!userData.firstName
+		|| !!userData.lastName
+	}
+
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		
+		if (!formIsValid()) return;
 		dispatch(asyncSignup({
 			username,
 			email,
@@ -68,12 +62,14 @@ const SignupForm = () => {
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
 			<div className={classes.paper}>
-				<Avatar className={classes.avatar}>
-					<LockOutlinedIcon />
-				</Avatar>
-				<Typography component="h1" variant="h5">
-					Sign up
-				</Typography>
+				<div className={classes.profile}>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						Sign up
+					</Typography>
+				</div>
 				<form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
@@ -85,42 +81,42 @@ const SignupForm = () => {
 								label="Username"
 								name="username"
 								autoComplete="username"
+								autoFocus
 								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
-								required
-								fullWidth
 								id="email"
 								label="Email Address"
 								name="email"
+								variant="outlined"
+								required
+								fullWidth
 								autoComplete="email"
 								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								autoComplete="fname"
+								id="firstName"
+								label="First Name"
 								name="firstName"
 								variant="outlined"
 								required
 								fullWidth
-								id="firstName"
-								label="First Name"
-								autoFocus
+								autoComplete="fname"
 								onChange={(e) => setFirstName(e.target.value)}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<TextField
-								variant="outlined"
-								required
-								fullWidth
 								id="lastName"
 								label="Last Name"
 								name="lastName"
+								variant="outlined"
+								required
+								fullWidth
 								autoComplete="lname"
 								onChange={(e) => setLastName(e.target.value)}
 							/>

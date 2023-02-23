@@ -29,8 +29,17 @@ const useStyles = makeStyles((theme) => ({
 			content: '""'
 		},
 	},
-	small: {
+	large: {
+		height: '600px'
+	},
+	medium: {
 		height: '380px'
+	},
+	small: {
+		height: '190px'
+	},
+	xsmall: {
+		height: '120px'
 	},
 	parallaxResponsive: {
 		[theme.breakpoints.down('md')]: {

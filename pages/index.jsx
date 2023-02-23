@@ -6,7 +6,7 @@ import HomeTemplate from '../src/components/templates/HomeTemplate/HomeTemplate'
 
 const Home = () => (
 	<HeadProvider>
-		<MainTemplate>
+		<MainTemplate headerSize='medium'>
 			<HomeTemplate />
 		</MainTemplate>
 	</HeadProvider>
