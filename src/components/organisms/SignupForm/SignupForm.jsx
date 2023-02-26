@@ -22,9 +22,32 @@ const SignupForm = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
 	
+	
+	
+
 	const formIsValid = () => {
-		//TODO
+		let valid = validateUsernameLength()
+		console.log(valid)
 		//validateRequiredFields()
+		return valid
+	}
+
+	const USERNAME_MIN_LEN = 3
+	const USERNAME_MIN_LEN_MSG = `Must be at least ${USERNAME_MIN_LEN} chars`
+	const USERNAME_MAX_LEN = 30
+	const USERNAME_MAX_LEN_MSG = `Must be at most ${USERNAME_MAX_LEN} chars`
+	const validateUsernameLength = () => {
+		let tooShort = username.length < USERNAME_MAX_LEN
+		let tooLong = username.length > USERNAME_MAX_LEN
+		if (tooShort) {
+			setUsernameValid({ error: true, errorMsg: USERNAME_MIN_LEN_MSG })
+			return false
+		}
+		if (tooLong) {
+			setUsernameValid({ error: true, errorMsg: USERNAME_MAX_LEN_MSG })
+			return false
+		}
+		setUsernameValid({ error: false, errorMsg: '' })
 		return true
 	}
 
@@ -51,12 +74,31 @@ const SignupForm = () => {
 	}
 
 	const [username, setUsername] = useState('')
+	const [usernameValid, setUsernameValid] = useState({
+		error: false, errorMsg: ''
+	})
 	const [email, setEmail] = useState('')
+	const [emailValid, setEmailValid] = useState({
+		error: false, errorMsg: ''
+	})
 	const [firstName, setFirstName] = useState('')
+	const [firstNameValid, setFirstNameValid] = useState({
+		error: false, errorMsg: ''
+	})
 	const [lastName, setLastName] = useState('')
+	const [lastNameValid, setLastNameValid] = useState({
+		error: false, errorMsg: ''
+	})
 	const [password, setPassword] = useState('')
+	const [passwordValid, setPasswordValid] = useState({
+		error: false, errorMsg: ''
+	})
 	const [repeatPassword, setRepeatPassword] = useState('')
+	const [repeatPasswordValid, setRepeatPasswordValid] = useState({
+		error: false, errorMsg: ''
+	})
 	const [allowExtraEmails, setAllowExtraEmails] = useState(false)
+	
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -74,15 +116,19 @@ const SignupForm = () => {
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
-								variant="outlined"
-								required
-								fullWidth
 								id="username"
 								label="Username"
 								name="username"
 								autoComplete="username"
-								autoFocus
 								onChange={(e) => setUsername(e.target.value)}
+								error={!!usernameValid.error}
+								helperText={
+									usernameValid.error &&
+									usernameValid.errorMsg
+								}
+								autoFocus
+								variant="outlined"
+								fullWidth
 							/>
 						</Grid>
 						<Grid item xs={12}>
