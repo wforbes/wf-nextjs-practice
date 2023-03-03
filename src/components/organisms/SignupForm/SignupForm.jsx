@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import _ from 'lodash'
 import {
 	Avatar,
 	Button,
@@ -21,43 +22,141 @@ import { asyncSignup } from 'src/store/reducers/user/user.async-actions'
 const SignupForm = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	
-	
-	
-
-	const formIsValid = () => {
-		let valid = validateUsernameLength()
-		console.log(valid)
-		//validateRequiredFields()
-		return valid
-	}
-
+	const USERNAME_REQUIRED_MSG = 'Field is Required'
 	const USERNAME_MIN_LEN = 3
 	const USERNAME_MIN_LEN_MSG = `Must be at least ${USERNAME_MIN_LEN} chars`
 	const USERNAME_MAX_LEN = 30
 	const USERNAME_MAX_LEN_MSG = `Must be at most ${USERNAME_MAX_LEN} chars`
-	const validateUsernameLength = () => {
-		let tooShort = username.length < USERNAME_MAX_LEN
-		let tooLong = username.length > USERNAME_MAX_LEN
-		if (tooShort) {
-			setUsernameValid({ error: true, errorMsg: USERNAME_MIN_LEN_MSG })
-			return false
-		}
-		if (tooLong) {
-			setUsernameValid({ error: true, errorMsg: USERNAME_MAX_LEN_MSG })
-			return false
-		}
-		setUsernameValid({ error: false, errorMsg: '' })
-		return true
+	const [formValues, setFormValues] = useState({
+		username: { 
+			value: '',
+			validConditions: [],
+			error: false,
+			errorMsg: ''
+		},
+		email: { value: '', validConditions: [], error: false, errorMsg: '' },
+		firstName: { value: '', validConditions: [], error: false, errorMsg: '' },
+		lastName: { value: '', validConditions: [], error: false, errorMsg: '' },
+		password: { value: '', validConditions: [], error: false, errorMsg: '' },
+		repeatPassword: { value: '', validConditions: [], error: false, errorMsg: '' },
+		allowExtraEmails: { value: false },
+		conditionsSet: false
+	})
+	
+	
+	const setFormConditions = () => {
+		return new Promise((resolve) => {
+			setFormValues({
+				...formValues,
+				username: {
+					...formValues.username,
+					validConditions: [
+						{
+							test: (v) => !!v,
+							msg: USERNAME_REQUIRED_MSG
+						},
+						{
+							test: (v) => v.length > USERNAME_MIN_LEN,
+							msg: USERNAME_MIN_LEN_MSG
+						},
+						{
+							test: (v) => v.length < USERNAME_MAX_LEN,
+							msg: USERNAME_MAX_LEN_MSG
+						}
+					],
+				},
+				conditionsSet: true
+			})
+			return resolve()
+		})
+		
 	}
 
-	const validateRequiredFields = () => {
-		return !_.isEmpty(userData.email)
-		|| !_.isEmpty(userData.password)
-		|| !!userData.firstName
-		|| !!userData.lastName
+	const onFieldChange = (input) => {
+		const { name, value } = input
+		
+		setFormValues({
+			...formValues,
+			[name]: {
+				...formValues[name],
+				value
+			}
+		})
+	}
+	
+	useEffect(() => {
+		if (!formValues.conditionsSet) setFormConditions()
+	}, [])
+
+	//TODO: is there a less verbose way than setting effect for every
+	//	field individually?
+	useEffect(() => {
+		validateField('username')
+	}, [formValues.username.value])
+	useEffect(() => {
+		validateField('email')
+	}, [formValues.email.value])
+	useEffect(() => {
+		validateField('firstName')
+	}, [formValues.firstName.value])
+	useEffect(() => {
+		validateField('lastName')
+	}, [formValues.lastName.value])
+	useEffect(() => {
+		validateField('password')
+	}, [formValues.password.value])
+	useEffect(() => {
+		validateField('repeatPassword')
+	}, [formValues.repeatPassword.value])
+
+	const validateField = (name) => {
+		let newFormValue = _.cloneDeep(formValues[name]) //TODO: may be expensive
+		let newErrorMsg = ''
+		let error = false
+		for (let condition of newFormValue.validConditions) {
+			if (!condition.test(newFormValue.value)) {
+				newErrorMsg = condition.msg
+				error =  true
+				break;
+			}
+		}
+		if (error && newErrorMsg.length > 0) {
+			setFormValues({
+				...formValues,
+				[name]: {
+					...newFormValue,
+					errorMsg: newErrorMsg,
+					error
+				}
+			})
+		} else if (newFormValue.error && newFormValue.errorMsg.length > 0) {
+			setFormValues({
+				...formValues,
+				[name]: {
+					...newFormValue,
+					errorMsg: '',
+					error
+				}
+			})
+		}
 	}
 
+	const formIsValid = () => {
+		let keys = Object.keys(formValues)
+		let valid = true
+		for (let i = 0; i < keys.length; i++) {
+			if (
+				typeof formValues[keys[i]] === 'object'
+				&& formValues[keys[i]].hasOwnProperty('error')
+				&& formValues[keys[i]].error
+			) {
+				valid = false
+				break
+			}
+		}
+		
+		return valid
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
@@ -73,6 +172,7 @@ const SignupForm = () => {
 		}))
 	}
 
+	/*
 	const [username, setUsername] = useState('')
 	const [usernameValid, setUsernameValid] = useState({
 		error: false, errorMsg: ''
@@ -98,7 +198,7 @@ const SignupForm = () => {
 		error: false, errorMsg: ''
 	})
 	const [allowExtraEmails, setAllowExtraEmails] = useState(false)
-	
+	*/
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -120,11 +220,11 @@ const SignupForm = () => {
 								label="Username"
 								name="username"
 								autoComplete="username"
-								onChange={(e) => setUsername(e.target.value)}
-								error={!!usernameValid.error}
+								onChange={(e) => onFieldChange(e.target)}
+								error={!!formValues.username.error}
 								helperText={
-									usernameValid.error &&
-									usernameValid.errorMsg
+									formValues.username.error &&
+									formValues.username.errorMsg
 								}
 								autoFocus
 								variant="outlined"
@@ -137,10 +237,9 @@ const SignupForm = () => {
 								label="Email Address"
 								name="email"
 								variant="outlined"
-								required
 								fullWidth
 								autoComplete="email"
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={(e) => onFieldChange(e.target)}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
@@ -149,10 +248,9 @@ const SignupForm = () => {
 								label="First Name"
 								name="firstName"
 								variant="outlined"
-								required
 								fullWidth
 								autoComplete="fname"
-								onChange={(e) => setFirstName(e.target.value)}
+								onChange={(e) => onFieldChange(e.target)}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
@@ -161,43 +259,40 @@ const SignupForm = () => {
 								label="Last Name"
 								name="lastName"
 								variant="outlined"
-								required
 								fullWidth
 								autoComplete="lname"
-								onChange={(e) => setLastName(e.target.value)}
+								onChange={(e) => onFieldChange(e.target)}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
 								variant="outlined"
-								required
 								fullWidth
 								name="password"
 								label="Password"
 								type="password"
 								id="password"
-								onChange={(e) => setPassword(e.target.value)}
+								onChange={(e) => onFieldChange(e.target)}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
 								variant="outlined"
-								required
 								fullWidth
 								name="repeat-password"
 								label="Repeat Password"
 								type="password"
 								id="repeat-password"
-								onChange={(e) => setRepeatPassword(e.target.value)}
+								onChange={(e) => onFieldChange(e.target)}
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<FormControlLabel
 								control={
 									<Checkbox
-										value={allowExtraEmails}
+										value={formValues.allowExtraEmails.value}
 										color="primary"
-										onChange={(e) => setAllowExtraEmails}
+										onChange={(e) => onFieldChange(e.target)}
 									/>
 								}
 								label="I want to receive news and updates via email."
