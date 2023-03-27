@@ -5,13 +5,12 @@ import {
 import { ChevronRight } from '@material-ui/icons'
 import GridContainer from 'src/components/molecules/Grid/GridContainer'
 import GridItem from 'src/components/molecules/Grid/GridItem'
-
-import classNames from "classnames";
+import clsx from "clsx";
 import useStyles from './HomeProfile.styles'
 
 const HomeProfile = () => {
 	const classes = useStyles()
-	const imageClasses = classNames(
+	const imageClasses = clsx(
 		classes.imgRaised,
 		classes.imgRoundedCircle,
 		classes.imgFluid
@@ -51,7 +50,7 @@ const HomeProfile = () => {
 						/>
 					</div>
 					<Typography variant="h5" component="h1">
-						Hello! My name is <strong>Will Forbes</strong>.<br /> I'm a Fullstack Software Engineer<br /> based in Southern California.
+						Hello! My name is <strong>Will Forbes</strong>.<br /> I'm a Full Stack Developer<br /> based in Southern California.
 					</Typography>
 					<List className={classes.listContainer}>
 						<ListItem>
@@ -59,7 +58,7 @@ const HomeProfile = () => {
 								<Avatar alt="passionIcon" src="/passion_color.png" width={40} height={40} className={classes.introAvatar} />
 							</ListItemAvatar>
 							<ListItemText
-								primary="Passionate about building my skills in software development and learning new things."
+								primary="Passionate about building my skills in software engineering and learning new things."
 							/>
 						</ListItem>
 						<ListItem>
@@ -81,7 +80,7 @@ const HomeProfile = () => {
 					</List>
 				</div>
 			</GridItem>
-			<GridItem xs={12} sm={12} md={6} className={classNames(classes.highlightContainer)}>
+			<GridItem xs={12} sm={12} md={6} className={clsx(classes.highlightContainer)}>
 				<Paper className={classes.introHighlights}>
 					<List>
 						<ListItem>
