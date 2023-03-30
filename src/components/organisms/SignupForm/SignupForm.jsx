@@ -16,16 +16,16 @@ import ValidatedTextField from 'src/components/molecules/ValidatedTextField/Vali
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import useStyles from './SignupForm.styles'
 //import SignupFormValidator from './SignupFormValidator'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, connect } from 'react-redux'
 import { asyncSignup } from 'src/store/reducers/user/user.async-actions'
 import { Actions } from 'src/store/reducers/signup/signup.actions'
 
 
-const SignupForm = () => {
+const SignupForm = ({ formState }) => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const formState = useSelector((state) => state.signup)
 
+	//TODO: move to molecule / redux
 	const [formValues, setFormValues] = useState({
 		allowExtraEmails: { value: false },
 		conditionsSet: false
@@ -41,26 +41,6 @@ const SignupForm = () => {
 				value
 			}
 		})
-	}
-	
-	const _formIsValid = () => {
-		dispatch(Actions.formIsValid())
-		console.log('valid', formState)
-		return false
-	}
-
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		if (!_formIsValid()) return;
-		dispatch(asyncSignup({
-			username,
-			email,
-			firstName,
-			lastName,
-			password,
-			repeatPassword,
-			allowExtraEmails
-		}))
 	}
 
 	const USERNAME_REQUIRED_MSG = 'Field is Required'
@@ -82,6 +62,23 @@ const SignupForm = () => {
 			msg: USERNAME_MAX_LEN_MSG
 		}
 	];
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		if (!formState.isValid) return
+		const signupObj = {};
+
+		for (let i = 0; i < formState.fields.length; i++) {
+			if (!formState.fields[i]?.fieldName) continue
+			const field = formState.fields[i]
+			if (field.error) return
+			signupObj[field.fieldName] = field.value
+		}
+		
+		dispatch(asyncSignup(signupObj))
+	}
+
+
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -154,10 +151,10 @@ const SignupForm = () => {
 							<ValidatedTextField
 								variant="outlined"
 								fullWidth
-								name="repeat-password"
+								name="repeatPassword"
 								label="Repeat Password"
 								type="password"
-								id="repeat-password"
+								id="repeatPassword"
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -179,8 +176,9 @@ const SignupForm = () => {
 						variant="contained"
 						color="primary"
 						className={classes.submit}
+						disabled={ !formState.isValid }
 					>
-					Sign Up
+						Sign Up
 					</Button>
 					<Grid container justify="flex-end">
 					<Grid item>
@@ -195,4 +193,11 @@ const SignupForm = () => {
 	);
 }
 
-export default SignupForm
+const mapStateToProps = (state, ownProps) => {
+	return {
+		formState: state.signup,
+		...ownProps
+	}
+}
+
+export default connect(mapStateToProps)(SignupForm)
