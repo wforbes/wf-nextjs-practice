@@ -10,15 +10,15 @@ const initialState = {
 const setFormData = handleAction(
 	Actions.setFormData,
 	(state, { payload }) => {
-		console.log('setFormData')
-		console.log('state', state)
-		console.log('payload', payload)
+		//console.log('setFormData')
+		//console.log('state', state)
+		//console.log('payload', payload)
 		if (!payload?.fieldName) return {...state}
 		let index = state.fields.findIndex((item) => {
-			console.log('looking for', payload.fieldName, 'on', item.fieldName)
+			//console.log('looking for', payload.fieldName, 'on', item.fieldName)
 			return item.fieldName === payload.fieldName
 		})
-		console.log('index found', index)
+		//console.log('index found', index)
 		if (index === -1){
 			state.fields.push(payload)
 			index = state.fields.length - 1;
@@ -30,7 +30,7 @@ const setFormData = handleAction(
 		}
 		
 		state = validateForm(state)
-		console.log('state.fields[idx]', state.fields[index])
+		//console.log('state.fields[idx]', state.fields[index])
 		return {...state}
 	},
 	initialState
@@ -38,7 +38,7 @@ const setFormData = handleAction(
 
 const validateField = (fieldState) => {
 	if (!fieldState?.validConditions || fieldState?.validConditions.length === 0) {
-		return
+		return {...fieldState}
 	}
 	let newState = _.cloneDeep(fieldState) //TODO: may be expensive?
 	let newErrorMsg = ''

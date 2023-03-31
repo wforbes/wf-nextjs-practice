@@ -6,7 +6,8 @@ import { Actions } from 'src/store/reducers/user/user.actions'
 const apiPrefix = '/api/user'
 
 export const asyncSignup = ({
-	firstName, lastName, email,
+	username, email,
+	firstName, lastName,
 	password, repeatPassword
 }) => async (dispatch) => {
 	console.log('user async actions')
@@ -14,14 +15,14 @@ export const asyncSignup = ({
 	try {
 		console.log(
 			'signing up...', 
-			{ firstName, lastName, email, password, repeatPassword }
+			{ username, email, firstName, lastName,  password, repeatPassword }
 		)
 
 		dispatch(FeedbackActions.setIsLoading({ isLoading: true }))
 		let { data: user } = await axios.post(`${apiPrefix}/signup`, {
+			username, email,
 			firstName, lastName,
-			email, password,
-			repeatPassword
+			password, repeatPassword
 		})
 		
 		console.log('after front-post')

@@ -66,15 +66,13 @@ const SignupForm = ({ formState }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		if (!formState.isValid) return
-		const signupObj = {};
-
+		const signupObj = {}
 		for (let i = 0; i < formState.fields.length; i++) {
 			if (!formState.fields[i]?.fieldName) continue
 			const field = formState.fields[i]
 			if (field.error) return
 			signupObj[field.fieldName] = field.value
 		}
-		
 		dispatch(asyncSignup(signupObj))
 	}
 
