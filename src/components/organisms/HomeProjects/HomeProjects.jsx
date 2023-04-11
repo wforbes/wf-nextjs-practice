@@ -7,58 +7,10 @@ import ShareIcon from '@material-ui/icons/Share'
 import { makeStyles } from '@material-ui/core'
 import GridContainer from 'src/components/molecules/Grid/GridContainer'
 import GridItem from 'src/components/molecules/Grid/GridItem'
-
-
-const useStyles = makeStyles({
-	cardMedia: {
-		height: 180,
-		boxShadow: 'inset 0 0 10px 10px rgba(200, 200, 200, 0.5)'
-	}
-})
-
-const cardContentStyles = makeStyles(() => {
-	return {
-		root: {
-			'& h2': {
-				margin: 0,
-				textAlign: 'center'
-			},
-			'& p': {
-				textAlign: 'center'
-			},
-			'& dl': {
-				'& dd.check': {
-					display: 'list-item',
-					marginLeft: '2ch',
-					'&::marker': {
-						content: '"✅ "',
-						fontSize: '1rem'
-					}
-				},
-				'& dd.teacher': {
-					display: 'list-item',
-					marginLeft: '2ch',
-					'&::marker': {
-						content: '"👩‍🏫 "',
-						fontSize: '1rem'
-					}
-				},
-				'& dd.wrench': {
-					display: 'list-item',
-					marginLeft: '2ch',
-					'&::marker': {
-						content: '"🔧 "',
-						fontSize: '1rem'
-					}
-				}
-			}
-		}
-	}
-})
+import useStyles from './HomeProjects.styles'
 
 const HomeProjects = () => {
 	const classes = useStyles()
-	const cardContentClasses = cardContentStyles()
 
 	const showShareDialog = (project) => {
 		return () => {
@@ -77,7 +29,7 @@ const HomeProjects = () => {
 		<>
 			<h1>Projects</h1>
 			<GridContainer>
-				<GridItem xs={12} md={4}>
+				<GridItem xs={12} md={4} className={classes.gridItem}>
 					<Card>
 						<CardActionArea>
 							<CardMedia
@@ -86,7 +38,7 @@ const HomeProjects = () => {
 								title='levelz.app'
 							/>
 						</CardActionArea>
-						<CardContent classes={cardContentClasses}>
+						<CardContent className={classes.cardContent}>
 							<h2>Levelz.app</h2>
 							<p>Web app that gameifies your tasks</p>
 							<dl>
@@ -97,7 +49,7 @@ const HomeProjects = () => {
 							</dl>
 						</CardContent>
 						<CardActions>
-							<IconButton aria-label="github" href="https://github.com/wforbes/levelz.app">
+							<IconButton aria-label="github" href="">
 								<GitHubIcon />
 							</IconButton>
 							<IconButton aria-label="share" onClick={showShareDialog({
@@ -119,15 +71,15 @@ const HomeProjects = () => {
 								title='placeholder img'
 							/>
 						</CardActionArea>
-						<CardContent classes={cardContentClasses}>
+						<CardContent className={classes.cardContent}>
 							<h2>LearnCode4Free.com</h2>
 							<p>
-								Directory of free coding resources
+								Information for new developers
 							</p>
 							<dl>
 								<dd className='teacher'>Listing of free coding resources</dd>
-								<dd className='teacher'></dd>
-								<dd className='teacher'></dd>
+								<dd className='teacher'>Free code tutorials and guides</dd>
+								<dd className='teacher'>Developer career articles</dd>
 								<dd className='wrench'>Built with <b>Wordpress</b>, <b>PHP</b>, and <b>MySQL</b></dd>
 							</dl>
 						</CardContent>
@@ -151,15 +103,15 @@ const HomeProjects = () => {
 								title=""
 							/>
 						</CardActionArea>
-						<CardContent classes={cardContentClasses}>
+						<CardContent className={classes.cardContent}>
 							<h2>ProjectTracker.dev</h2>
 							<p>
-								(todo) Project tracking app
+								Project management and tracking app
 							</p>
 							<dl>
-								<dd className='check'>Ticketing system</dd>
-								<dd className='check'>Kanban board</dd>
-								<dd className='check'>Gantt chart?</dd>
+								<dd className='clipboard'>Ticketing system</dd>
+								<dd className='clipboard'>Kanban board</dd>
+								<dd className='clipboard'>Gantt chart?</dd>
 								<dd className='wrench'>Built with <b>Next.js</b>, <b>Django</b>, and <b>PostgreSQL</b></dd>
 							</dl>
 						</CardContent>
@@ -182,15 +134,15 @@ const HomeProjects = () => {
 								image="/img/selfie.png"
 								title=""
 							/>
-							<CardContent classes={cardContentClasses}>
+							<CardContent className={classes.cardContent}>
 								<h2>InstaChat.dev</h2>
 								<p>
-									(todo) Real-time chat application
+									Real-time chat application
 								</p>
 								<dl>
-									<dd className=''>Message friends instantly</dd>
-									<dd className=''>Share a link to begin a chat with anyone</dd>
-									<dd className=''>Send pictures, videos, and audio</dd>
+									<dd className='chat-bubble'>Message friends instantly</dd>
+									<dd className='chat-bubble'>Share a link to begin a chat with anyone</dd>
+									<dd className='chat-bubble'>Send pictures, videos, and audio</dd>
 									<dd className='wrench'>Built with <b>Frontend</b>, <b>Backend</b>, and <b>Database</b></dd>
 								</dl>
 							</CardContent>
@@ -205,15 +157,15 @@ const HomeProjects = () => {
 								image="/img/selfie.png"
 								title=""
 							/>
-							<CardContent classes={cardContentClasses}>
+							<CardContent className={classes.cardContent}>
 								<h2>CashKeep.dev</h2>
 								<p>
-									(todo) Personal Finance Tracking app
+									Personal Finance Tracking app
 								</p>
 								<dl>
-									<dd className=''>Make budgets and track spending</dd>
-									<dd className=''>Organize and label your transactions</dd>
-									<dd className=''>Plan savings, identify ways to cut back</dd>
+									<dd className='money'>Make budgets and track spending</dd>
+									<dd className='money'>Organize and label your transactions</dd>
+									<dd className='money'>Plan savings, identify ways to cut back</dd>
 									<dd className='wrench'>Built with <b>Frontend</b>, <b>Backend</b>, and <b>Database</b></dd>
 								</dl>
 							</CardContent>
@@ -228,15 +180,15 @@ const HomeProjects = () => {
 								image="/img/selfie.png"
 								title=""
 							/>
-							<CardContent classes={cardContentClasses}>
+							<CardContent className={classes.cardContent}>
 								<h2>StoreMart.dev</h2>
 								<p>
 									(todo) Sample custom eCommerce application
 								</p>
 								<dl>
-									<dd className=''>Interactive eCommerce app</dd>
-									<dd className=''>Product listings and inventory</dd>
-									<dd className=''>etc...</dd>
+									<dd className='cart'>Interactive eCommerce app</dd>
+									<dd className='cart'>Product listings and inventory</dd>
+									<dd className='cart'>etc...</dd>
 									<dd className='wrench'>Built with <b>Frontend</b>, <b>Backend</b>, and <b>Database</b></dd>
 								</dl>
 							</CardContent>
