@@ -2,11 +2,12 @@ import {
 	Card, CardMedia, CardContent, CardActionArea,
 	IconButton, CardActions
 } from '@material-ui/core'
+import LinkIcon from '@material-ui/icons/Link'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import ShareIcon from '@material-ui/icons/Share'
-import { makeStyles } from '@material-ui/core'
 import GridContainer from 'src/components/molecules/Grid/GridContainer'
 import GridItem from 'src/components/molecules/Grid/GridItem'
+import ProjectFeatureList from 'src/components/organisms/HomeProjects/ProjectFeatureList'
 import useStyles from './HomeProjects.styles'
 
 const HomeProjects = () => {
@@ -25,176 +26,143 @@ const HomeProjects = () => {
 		}
 	}
 
+	const projects = [
+		{
+			title: 'Levelz.app',
+			description: 'Web app that gameifies your tasks',
+			image: '/img/levelz1.png',
+			features: [
+				'Complete to-do lists, simple and complex',
+				{
+					icon: '😇',
+					text: 'Pick up good habits, quit bad habits',
+				},
+				{
+					icon: '📋',
+					text: 'Learn new skills, share skill templates'
+				},
+				
+			],
+			listIcon: '✅',
+			tech: ['Vue', 'Express.js', 'MongoDB'],
+			github: 'https://github.com/wforbes/levelz.app',
+			url: 'https://levelz.app'
+		},
+		{
+			title: 'LearnCodeForFree.com',
+			description: 'Information for new developers',
+			url: 'https://learncodeforfree.com',
+			image: '/img/selfie.png',
+			features: [
+				'Listing of free coding resources',
+				'Free code tutorials',
+				'Beginning dev career advice'
+			],
+			tech: ['Wordpress', 'PHP', 'MySQL'],
+			listIcon: '👩‍🏫'
+		},
+		{
+			//title: 'Days.dev',
+			title: 'Count.day',
+			description: 'Personal time perspective app',
+			image: '/img/selfie.png',
+			features: [
+				'See how many days you have lived',
+				'Remember important life events',
+				'Journal daily and plan for the future'
+			],
+			tech: ['Next.js', 'Prisma', 'PostgreSQL'],
+			listIcon: '📅',
+			url: 'https://count.day',
+			//github: 'https://github.com/wforbes/count.day',
+		},
+		{
+			title: 'ProjectTracker.dev',
+			description: 'Project management app',
+			image: '/img/selfie.png',
+			features: [
+				'Ticketing system',
+				'Kanban board',
+				'Gantt chart'
+			],
+			tech: ['Next.js', 'Django', 'PostgreSQL'],
+			listIcon: '📋'
+			//github: 'https://github.com/wforbes/projecttracker.dev',
+			//url: 'https://projecttracker.dev',
+		},
+		{
+			title: 'InstaChat.dev',
+			description: 'Real-time chat app',
+			image: '/img/selfie.png',
+			features: [
+				'Invite and message individuals and groups',
+				'Enjoy reactions and emojis',
+				'Share emojis, photos, videos and audio'
+			],
+			tech: ['Vue', 'Fastify', 'MongoDB'],
+			listIcon: '💬'
+			//github: 'https://github.com/wforbes/instachat.dev',
+			//url: 'https://instachat.dev',
+		},
+		{
+			title: 'CashKeep.dev',
+			description: 'Personal finance app',
+			image: '/img/selfie.png',
+			features: [
+				'Make budgets and track expenses',
+				'Organize and label transactions',
+				'Plan savings, identify ways to save'
+			],
+			tech: ['React', 'Laravel', 'PostgreSQL'],
+			listIcon: '💵'
+			//github: 'https://github.com/wforbes/cashkeep.dev',
+			//url: 'https://cashkeep.dev',
+		},
+	]
+
+
 	return (
 		<>
 			<h1>Projects</h1>
+			{/* TODO: Search / filter controls */}
 			<GridContainer>
-				<GridItem xs={12} md={4} className={classes.gridItem}>
-					<Card>
-						<CardActionArea>
-							<CardMedia
-								className={classes.cardMedia}
-								image='/img/levelz1.png'
-								title='levelz.app'
-							/>
-						</CardActionArea>
-						<CardContent className={classes.cardContent}>
-							<h2>Levelz.app</h2>
-							<p>Web app that gameifies your tasks</p>
-							<dl>
-								<dd className='check'>Complete to-do lists, simple and complex</dd>
-								<dd className='check'>Pick up good habits, quit bad habits</dd>
-								<dd className='check'>Learn new skills, share skill templates</dd>
-								<dd className='wrench'>Built with <b>Vue</b>, <b>Express</b>, and <b>MongoDB</b></dd>
-							</dl>
-						</CardContent>
-						<CardActions>
-							<IconButton aria-label="github" href="">
-								<GitHubIcon />
-							</IconButton>
-							<IconButton aria-label="share" onClick={showShareDialog({
-								title: 'levelz.app',
-								description: 'Web app that gameifies your tasks',
-								url: 'https://levelz.app'
-							})}>
-								<ShareIcon />
-							</IconButton>
-						</CardActions>
-					</Card>
-				</GridItem>
-				<GridItem xs={12} md={4}>
-					<Card>
-						<CardActionArea>
-							<CardMedia
-								className={classes.cardMedia}
-								image='/img/selfie.png'
-								title='placeholder img'
-							/>
-						</CardActionArea>
-						<CardContent className={classes.cardContent}>
-							<h2>LearnCode4Free.com</h2>
-							<p>
-								Information for new developers
-							</p>
-							<dl>
-								<dd className='teacher'>Listing of free coding resources</dd>
-								<dd className='teacher'>Free code tutorials and guides</dd>
-								<dd className='teacher'>Developer career articles</dd>
-								<dd className='wrench'>Built with <b>Wordpress</b>, <b>PHP</b>, and <b>MySQL</b></dd>
-							</dl>
-						</CardContent>
-						<CardActions>
-							<IconButton aria-label="share" onClick={showShareDialog({
-								title: 'learncode4free.com',
-								description: 'Directory of free coding resources',
-								url: 'https://learncode4free.com'
-							})}>
-								<ShareIcon />
-							</IconButton>
-						</CardActions>
-					</Card>
-				</GridItem>
-				<GridItem xs={12} md={4}>
-					<Card>
-						<CardActionArea>
-							<CardMedia
-								className={classes.cardMedia}
-								image="/img/selfie.png"
-								title=""
-							/>
-						</CardActionArea>
-						<CardContent className={classes.cardContent}>
-							<h2>ProjectTracker.dev</h2>
-							<p>
-								Project management and tracking app
-							</p>
-							<dl>
-								<dd className='clipboard'>Ticketing system</dd>
-								<dd className='clipboard'>Kanban board</dd>
-								<dd className='clipboard'>Gantt chart?</dd>
-								<dd className='wrench'>Built with <b>Next.js</b>, <b>Django</b>, and <b>PostgreSQL</b></dd>
-							</dl>
-						</CardContent>
-						<CardActions>
-							<IconButton aria-label="share" onClick={showShareDialog({
-								title: 'projecttracker.dev',
-								description: '',
-								url: 'https://projecttracker.dev'
-							})}>
-								<ShareIcon />
-							</IconButton>
-						</CardActions>
-					</Card>
-				</GridItem>
-				<GridItem xs={12} md={4}>
-					<Card>
-						<CardActionArea>
-							<CardMedia
-								className={classes.cardMedia}
-								image="/img/selfie.png"
-								title=""
-							/>
+				{projects.map((project, idx) => (
+					<GridItem xs={12} md={4} key={idx} className={classes.gridItem}>
+						<Card>
+							<CardActionArea>
+								<CardMedia
+									className={classes.cardMedia}
+									image={project.image}
+									title={project.title}
+								/>
+							</CardActionArea>
 							<CardContent className={classes.cardContent}>
-								<h2>InstaChat.dev</h2>
-								<p>
-									Real-time chat application
-								</p>
-								<dl>
-									<dd className='chat-bubble'>Message friends instantly</dd>
-									<dd className='chat-bubble'>Share a link to begin a chat with anyone</dd>
-									<dd className='chat-bubble'>Send pictures, videos, and audio</dd>
-									<dd className='wrench'>Built with <b>Frontend</b>, <b>Backend</b>, and <b>Database</b></dd>
-								</dl>
+								<h2>{project.title}</h2>
+								<p>{project.description}</p>
+								<ProjectFeatureList
+									listIcon={project.listIcon}
+									features={project.features}
+									tech={project.tech}
+								/>
 							</CardContent>
-						</CardActionArea>
-					</Card>
-				</GridItem>
-				<GridItem xs={12} md={4}>
-					<Card>
-						<CardActionArea>
-							<CardMedia
-								className={classes.cardMedia}
-								image="/img/selfie.png"
-								title=""
-							/>
-							<CardContent className={classes.cardContent}>
-								<h2>CashKeep.dev</h2>
-								<p>
-									Personal Finance Tracking app
-								</p>
-								<dl>
-									<dd className='money'>Make budgets and track spending</dd>
-									<dd className='money'>Organize and label your transactions</dd>
-									<dd className='money'>Plan savings, identify ways to cut back</dd>
-									<dd className='wrench'>Built with <b>Frontend</b>, <b>Backend</b>, and <b>Database</b></dd>
-								</dl>
-							</CardContent>
-						</CardActionArea>
-					</Card>
-				</GridItem>
-				<GridItem xs={12} md={4}>
-					<Card>
-						<CardActionArea>
-							<CardMedia
-								className={classes.cardMedia}
-								image="/img/selfie.png"
-								title=""
-							/>
-							<CardContent className={classes.cardContent}>
-								<h2>StoreMart.dev</h2>
-								<p>
-									(todo) Sample custom eCommerce application
-								</p>
-								<dl>
-									<dd className='cart'>Interactive eCommerce app</dd>
-									<dd className='cart'>Product listings and inventory</dd>
-									<dd className='cart'>etc...</dd>
-									<dd className='wrench'>Built with <b>Frontend</b>, <b>Backend</b>, and <b>Database</b></dd>
-								</dl>
-							</CardContent>
-						</CardActionArea>
-					</Card>
-				</GridItem>
+							<CardActions>
+								{project?.github && (
+									<IconButton aria-label="github" href={project.github} target="_blank">
+										<GitHubIcon />
+									</IconButton>
+								)}
+								{project?.url && (
+									<IconButton aria-label="github" href={project.url} target="_blank">
+										<LinkIcon />
+									</IconButton>
+								)}
+								<IconButton aria-label="share" onClick={showShareDialog(project)}>
+									<ShareIcon />
+								</IconButton>
+							</CardActions>
+						</Card>
+					</GridItem>
+				))}
 			</GridContainer>
 			{/* TODO: MobileStepper with dots */}
 		</>

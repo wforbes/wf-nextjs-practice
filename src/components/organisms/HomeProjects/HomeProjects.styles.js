@@ -12,64 +12,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 		'& p': {
 			textAlign: 'center'
-		},
-		'& dl': {
-			'& dd.check': {
-				display: 'list-item',
-				marginLeft: '2ch',
-				'&::marker': {
-					content: '"✅ "',
-					fontSize: '1rem'
-				}
-			},
-			'& dd.teacher': {
-				display: 'list-item',
-				marginLeft: '2ch',
-				'&::marker': {
-					content: '"👩‍🏫 "',
-					fontSize: '1rem'
-				}
-			},
-			'& dd.clipboard': {
-				display: 'list-item',
-				marginLeft: '2ch',
-				'&::marker': {
-					content: '"📋 "',
-					fontSize: '1rem'
-				}
-			},
-			'& dd.chat-bubble': {
-				display: 'list-item',
-				marginLeft: '2ch',
-				'&::marker': {
-					content: '"💬 "',
-					fontSize: '1rem'
-				}
-			},
-			'& dd.money': {
-				display: 'list-item',
-				marginLeft: '2ch',
-				'&::marker': {
-					content: '"💵 "',
-					fontSize: '1rem'
-				}
-			},
-			'& dd.cart': {
-				display: 'list-item',
-				marginLeft: '2ch',
-				'&::marker': {
-					content: '"🛒 "',
-					fontSize: '1rem'
-				}
-			},
-			'& dd.wrench': {
-				display: 'list-item',
-				marginLeft: '2ch',
-				'&::marker': {
-					content: '"🔧 "',
-					fontSize: '1rem'
-				}
-			}
 		}
 	},
 	cardMedia: {
