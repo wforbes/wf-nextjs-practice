@@ -35,7 +35,7 @@ export const asyncSignup = ({
 	} catch (error) {
 		const { message, details } = getErrorType(error)
 		dispatch(FeedbackActions.setFeedback({
-			message: `${message}. ${details}`,
+			message: `[${message}] ${details}`,
 			type: 'error'
 		}))
 	} finally {

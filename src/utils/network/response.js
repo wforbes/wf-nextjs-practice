@@ -32,7 +32,7 @@ export const sendErrorResponse = (_req, res, error) => {
 	}
 
 	if (!statusMessage) {
-		statusMessage = 'Internal server error'
+		statusMessage = 'Error'
 		details = error.message
 	}
 
