@@ -9,24 +9,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		switch (method) {
 			case 'POST': {
-				const user = await signup(username, firstName, lastName, email, password)
+				const user = await signup(username, firstName, lastName, email, password, repeatPassword)
 				sendSuccessResponse(req, res, 'user', user, 200)
 				break
 			}
 			default: break
 		}	
-	} catch (error) {
+	} catch (error: any) {
 		console.log('signup error', error)
-		sendErrorResponse(null, res, new Error(errorMessages.generic))
+		sendErrorResponse(null, res, new Error(error.response?.data?.message || errorMessages.generic))
 	}
 }
 
-async function signup(username: string, firstName: string, lastName: string, email: string, password: string) {
+async function signup(username: string, firstName: string, lastName: string, email: string, password: string, repeatPassword: string) {
 	console.log('hit signup func')
 	try {
 		console.log('test')
 		const { data: user } = await axios.post('http://localhost:4201/user/signup', {
-			username, firstName, lastName, email, password
+			username, firstName, lastName, email, password, repeatPassword
 		})
 		console.log('got user', user)
 		return user
