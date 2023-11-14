@@ -1,0 +1,36 @@
+.list {
+    font-size: 14px;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: inherit;
+}
+
+.list-item {
+    float: left;
+    color: inherit;
+    position: relative;
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+.nav-link {
+    position: relative;
+    padding: 0.9375rem;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    line-height: 20px;
+    text-decoration: none;
+    margin: 0px;
+    display: inline-flex;
+}
+
+.nav-link:hover, .nav-link:focus {
+    color:white;
+    background: rgba(200, 200, 200, 0.2);
+}

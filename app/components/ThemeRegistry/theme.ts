@@ -1,5 +1,6 @@
 import { Roboto } from 'next/font/google';
 import { createTheme } from '@mui/material/styles';
+import { grey, lightGreen } from '@mui/material/colors';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -9,7 +10,12 @@ const roboto = Roboto({
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    primary: {
+      main: grey[900]
+    },
+    secondary: {
+      main: lightGreen['A400']
+    }
   },
   typography: {
     fontFamily: roboto.style.fontFamily,
