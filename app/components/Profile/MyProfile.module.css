@@ -1,0 +1,65 @@
+.selfIntroContainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.introHighlights {
+    padding: 1em;
+}
+
+@media (min-width: 959px) {
+    .highlightContainer {
+        padding-top: 3em;
+    }
+}
+@media (max-width: 960px) {
+    .highlightContainer {
+        padding-top: 0.5em !important;
+    }
+}
+
+.listContainer {
+    padding: 1em;
+}
+
+.introAvatar {
+    overflow: visible !important;
+    margin-top: 2.2rem;
+    width: 2em;
+    height: 2em;
+}
+
+.highlightAvatar {
+    overflow: visible !important;
+}
+
+.imgRaised {
+    box-shadow:
+        0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.imgRoundedCircle {
+    border-radius: 50% !important;
+}
+
+.imgFluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.profile {
+    text-align: center;
+}
+.profile img {
+    /*max-width: 140px;*/
+    /*width: 100%;*/
+    margin: 0 auto;
+    /*transform: translate3d(0, -50%, 0);*/
+}
+
+.profileImgContainer {
+    height: '15vh'; /* reduces space between img and profile text
+                   	needs to match highlight box height*/
+}
